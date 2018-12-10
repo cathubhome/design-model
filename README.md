@@ -1,3 +1,4 @@
+GIT地址：https://github.com/cathubhome/design-model.git  
 # Java的三种代理模式：  
 释义：代理模式是23种设计模式之一，是==通过代理对象访问目标对象，扩展目标对象的功能==。    
 
@@ -40,6 +41,45 @@ Cglib子类代理实现方法:
 - 2.引入功能包后,就可以在内存中动态构建子类
 - 3.==代理的类不能为final==,否则报错
 - 4.==目标对象的方法如果为final/static,那么就不会被拦截==,即不会执行目标对象额外的业务方法.
+- 
+
+```
+public class CglibProxyFactory implements MethodInterceptor{
+
+    /**
+     * 目标对象
+     */
+    private Object target;
+
+    public CglibProxyFactory(Object target) {
+        this.target = target;
+    }
+
+    /**
+     * 创建代理对象
+     * @return
+     */
+    public Object getProxyInstance(){
+        //工具类
+        Enhancer enhancer = new Enhancer();
+        //设置父类
+        enhancer.setSuperclass(target.getClass());
+        //设置回调函数
+        enhancer.setCallback(this);
+        //创建子类（代理对象）
+        return enhancer.create();
+    }
+
+    @Override
+    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+        System.out.println("start transaction...");
+        Object invoke = method.invoke(target, objects);
+        System.out.println("transaction commit...");
+        return invoke;
+    }
+}
+```
+
 
 Spring AOP中使用到了jdk代理与cglib代理，对于加入IOC容器的目标对象，如果实现了接口就使用jdk代理，如果没有实现接口，就是使用cglib代理
 
