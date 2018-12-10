@@ -1,8 +1,13 @@
-GIT地址：https://github.com/cathubhome/design-model.git  
-# 1、建设者模式  
-&#160;&#160;&#160;&#160;建设者模式是创建对象模式三剑客之一，==该模式用于简化复杂对象的构造，使用构建器隐藏对象构造的复杂性，静态内部类接受链式方法的调用==。
+package com.ne.designmodel.buildermodel;
 
-```
+import java.util.List;
+
+/**
+ * Created with IDEA
+ * Author: wymiracle
+ * Description: 建设者模式（创建对象模式三剑客之一）
+ * Time:Create on 2018/12/10 9:44
+ */
 public class Programmer {
 
     private String fristName;
@@ -87,27 +92,3 @@ public class Programmer {
                 '}';
     }
 }
-```
- 
-```
-@Test
-    public void testBuilderModel() {
-        Programmer programmer = new Programmer.ProgrammerBuilder()
-                .setFirstName("tom")
-                .setLastName("ne")
-                .setTelphone("13125111268")
-                .setAddress("shangahi")
-                .setLanguages(new ArrayList<String>() {{
-                    add("English");
-                    add("Chinese");
-                }})
-                .setProjects(new ArrayList<String>() {{
-                    add("vehilce system");
-                    add("education system");
-                }})
-                .build();
-        System.out.println(programmer.toString());
-    }
-```
-
-
