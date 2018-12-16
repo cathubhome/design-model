@@ -10,7 +10,7 @@ import org.springframework.aop.framework.ProxyFactory;
  * Description: springAOP测试
  * Time:Create on 2018/12/16 12:50
  */
-public class TestSpringAop {
+public class SpringAopTest {
 
     @Test
     public void testSpringAop() {
